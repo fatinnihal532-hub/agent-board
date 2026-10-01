@@ -44,10 +44,9 @@ header {
 
 h1 { margin: 0; font-size: 22px; }
 #summary { margin: 4px 0 0; color: var(--muted); }
+#connection { margin: 0; color: var(--danger); }
 
-.filter { display: flex; align-items: center; gap: 8px; color: var(--muted); }
-
-input, select, button {
+input, textarea, button {
   font: inherit;
   color: inherit;
   background: var(--surface);
@@ -56,8 +55,11 @@ input, select, button {
   padding: 8px 10px;
 }
 
+textarea { width: 100%; resize: vertical; }
 button { cursor: pointer; }
-input:focus-visible, select:focus-visible, button:focus-visible, .card:focus-visible {
+button:disabled { opacity: 0.4; cursor: default; }
+
+input:focus-visible, textarea:focus-visible, button:focus-visible, summary:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
@@ -70,7 +72,10 @@ input:focus-visible, select:focus-visible, button:focus-visible, .card:focus-vis
   margin: 0 auto 20px;
 }
 
-#new-task button {
+#new-task textarea, #form-error { grid-column: 1 / -1; }
+#form-error { margin: 0; color: var(--danger); }
+
+#new-task button, button.primary {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--bg);
@@ -90,10 +95,7 @@ input:focus-visible, select:focus-visible, button:focus-visible, .card:focus-vis
   border-radius: 12px;
   padding: 12px;
   min-height: 200px;
-  border: 2px solid transparent;
 }
-
-.column.drop-target { border-color: var(--accent); }
 
 .column h2 {
   display: flex;
@@ -113,21 +115,35 @@ input:focus-visible, select:focus-visible, button:focus-visible, .card:focus-vis
   border-radius: 10px;
   padding: 10px 12px;
   margin-bottom: 8px;
-  cursor: grab;
 }
 
-.card.dragging { opacity: 0.4; }
+.card.failed { border-color: var(--danger); }
 .card h3 { margin: 0 0 4px; font-size: 15px; font-weight: 600; overflow-wrap: anywhere; }
 .meta { display: flex; justify-content: space-between; gap: 8px; margin: 0 0 8px; color: var(--muted); font-size: 13px; }
-.actions { display: flex; gap: 6px; }
-.actions button { padding: 2px 8px; font-size: 13px; }
+.problem { margin: 0 0 8px; font-size: 13px; color: var(--danger); overflow-wrap: anywhere; }
+
+details { margin-bottom: 8px; }
+summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+pre {
+  margin: 6px 0 0;
+  padding: 8px;
+  max-height: 240px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: var(--column);
+  border-radius: 6px;
+  font: 12px/1.5 ui-monospace, Consolas, monospace;
+}
+
+.feedback textarea { margin-bottom: 6px; font-size: 13px; }
+.actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.actions button { padding: 3px 9px; font-size: 13px; }
 .actions .remove { margin-left: auto; color: var(--danger); }
-.actions button:disabled { opacity: 0.35; cursor: default; }
 
 @media (max-width: 800px) {
   #board { grid-template-columns: 1fr; }
   #new-task { grid-template-columns: 1fr 1fr; }
-  #task-title { grid-column: 1 / -1; }
-  #new-task button { grid-column: 1 / -1; }
+  #task-title, #new-task button { grid-column: 1 / -1; }
   .column { min-height: 0; }
 }

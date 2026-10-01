@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent Board</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Agent Board</h1>
+      <p id="summary" aria-live="polite"></p>
+    </div>
+    <p id="connection" role="status"></p>
+  </header>
+
+  <form id="new-task" autocomplete="off">
+    <input id="task-title" placeholder="What should the agent do?" aria-label="Task" required>
+    <input id="task-agent" placeholder="Agent name" aria-label="Agent" list="agents" required>
+    <datalist id="agents"></datalist>
+    <input id="task-budget" type="number" min="0" step="0.01" placeholder="Budget $" aria-label="Budget in dollars">
+    <button type="submit">Add task</button>
+    <textarea id="task-instructions" rows="2" placeholder="Details for the agent (optional)" aria-label="Details"></textarea>
+    <p id="form-error" role="alert" hidden></p>
+  </form>
+
+  <main id="board"></main>
+
+  <template id="card-template">
+    <article class="card">
+      <h3></h3>
+      <p class="meta"><span class="agent"></span><span class="cost"></span></p>
+      <p class="problem" hidden></p>
+      <details>
+        <summary>Output</summary>
+        <pre></pre>
+      </details>
+      <form class="feedback" hidden>
+        <textarea rows="2" placeholder="What should change?" aria-label="Feedback for the agent" required></textarea>
+        <div class="actions">
+          <button type="submit">Send back</button>
+          <button type="button" class="cancel">Cancel</button>
+        </div>
+      </form>
+      <div class="actions main-actions"></div>
+    </article>
+  </template>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
