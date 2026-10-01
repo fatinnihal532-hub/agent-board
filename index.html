@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent Board</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Agent Board</h1>
+      <p id="summary" aria-live="polite"></p>
+    </div>
+    <label class="filter">
+      Agent
+      <select id="agent-filter"></select>
+    </label>
+  </header>
+
+  <form id="new-task" autocomplete="off">
+    <input id="task-title" placeholder="What should the agent do?" aria-label="Task" required>
+    <input id="task-agent" placeholder="Agent" aria-label="Agent" list="agents" required>
+    <datalist id="agents"></datalist>
+    <input id="task-cost" type="number" min="0" step="0.01" placeholder="Budget $" aria-label="Budget in dollars">
+    <button type="submit">Add task</button>
+  </form>
+
+  <main id="board"></main>
+
+  <template id="card-template">
+    <article class="card" draggable="true">
+      <h3></h3>
+      <p class="meta"><span class="agent"></span><span class="cost"></span></p>
+      <div class="actions">
+        <button class="back" type="button" aria-label="Move back">←</button>
+        <button class="forward" type="button" aria-label="Move forward">→</button>
+        <button class="remove" type="button" aria-label="Delete task">Delete</button>
+      </div>
+    </article>
+  </template>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
