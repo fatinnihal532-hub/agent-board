@@ -1,5 +1,7 @@
 # agent-board
 
+[![tests](https://github.com/fatinnihal532-hub/agent-board/actions/workflows/tests.yml/badge.svg)](https://github.com/fatinnihal532-hub/agent-board/actions/workflows/tests.yml)
+
 A task board that actually runs the work: hand a task to an AI agent, watch its output
 stream in live, then approve it or send it back with feedback.
 
